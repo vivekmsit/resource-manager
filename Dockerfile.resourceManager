@@ -1,0 +1,34 @@
+# syntax=docker/dockerfile:1.0.0-experimental
+FROM ubuntu:18.04
+
+RUN apt-get update
+
+# install basic tools
+RUN apt-get install -y cmake wget curl libssl-dev git gcc-multilib build-essential ca-certificates openssl \
+    libtool autoconf autotools-dev automake autopoint gettext texinfo apt-utils pkg-config libcurlpp-dev \
+    uncrustify libboost-all-dev libcurl4-openssl-dev #curl for http client implementation
+
+# install google test framework
+RUN git clone https://github.com/google/googletest.git \
+    && mkdir -p googletest/build \
+    && cd googletest/build \
+    && cmake .. \
+    && make -j8 install
+
+# install libmicrohttpd (Required for HTTP Server)
+RUN git clone https://github.com/Karlson2k/libmicrohttpd.git \
+    && mkdir -p libmicrohttpd/build \
+    && cd libmicrohttpd \
+    && ./autogen.sh \
+    && cd build \
+    && ../configure --prefix /usr \
+    && make -j8 install
+
+# install libhttpserver (Required for HTTP Server)
+RUN git clone https://github.com/etr/libhttpserver.git \
+    && cd libhttpserver \
+    && ./bootstrap \
+    && mkdir build \
+    && cd build \
+    && ../configure --prefix /usr \
+    && make -j8 install

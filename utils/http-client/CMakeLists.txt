@@ -19,3 +19,5 @@ target_link_libraries(
         curlpp
         ${Boost_LIBRARIES}
 )
+
+install(TARGETS http_client DESTINATION ${CMAKE_INSTALL_BINDIR})

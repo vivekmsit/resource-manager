@@ -22,23 +22,29 @@ For Testing purpose, HTTP client has been implemented using CURL library.
 
 ## Usage
 
-It is advised to use docker for running the Resource Manager as mentioned in below steps:
+It is advised to use docker for running the Resource Manager. 
+Use below mentioned steps to run resource manager:
 
-1. Create docker image by running build_docker_resource_manager.sh. This creates docker image from docker file: Dockerfile.resourceManager.
-2. Start docker container using run_docker_resource_manager.sh. 
-3. Compile and install Resource Manager using following steps:
-   a.) git clone https://github.com/vivekmsit/resource-manager.git
-   b.) cd resource-manager
-   c.) mkdir build
-   d.) cd build
-   e.) cmake ..
-   f.) make
-4. Run resource manager using following command: ./src/resource-manager & (This will run resource manager in the background).
-5. Run http Client using command:
-   ./utils/http-client/http_client --allocate user1 (For allocating resource to user1)
-   ./utils/http-client/http_client --deallocate 1 (For deallocating resource ID 1)
-   ./utils/http-client/http_client --list user1 (For listing resource IDs for user1)
-   ./utils/http-client/http_client --listAll dummy (For listing resource IDs for all the users)
+1. Clone this repository. (git clone https://github.com/vivekmsit/resource-manager.git && cd resource-manager)
+2. Create docker image by running build_docker_resource_manager.sh. This creates docker image from docker file: Dockerfile.resourceManager.
+3. Start docker container using run_docker_resource_manager.sh. 
+4. Compile and install Resource Manager using following steps:
+   a.) mkdir build
+   b.) cd build
+   c.) cmake ..
+   d.) make -j8 install
+5. Run resource manager using following command: resource-manager & (This will run resource manager in the background). Resource manager
+   will start HTTP server using URL http://localhost:8080.
+6. Run http Client using command:
+   http_client --allocate user1 (For allocating resource to user1)
+   http_client --deallocate 1 (For deallocating resource ID 1)
+   http_client --list user1 (For listing resource IDs for user1)
+   http_client --listAll dummy (For listing resource IDs for all the users)
+
+## Unit Tests
+
+Unit tests can be compiled using BUILD_UNIT_TESTS=ON cmake argument: cmake -DBUILD_UNIT_TESTS=ON ..
+Run unit tests using runAllTests command.
 
 ## Scope for Improvement
 * Separate Database can be used for storing resource IDs information. Preferred library: sqlite.

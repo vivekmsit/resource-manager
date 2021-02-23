@@ -41,6 +41,13 @@ Use below mentioned steps to run resource manager:
    http_client --list user1 (For listing resource IDs for user1)
    http_client --listAll dummy (For listing resource IDs for all the users)
 
+   Alternative way to test using curl command:
+
+   http://localhost:8080/allocate?user=user1 (For allocating resource to user1)
+   http://localhost:8080/deallocate?resourceId=1 (For deallocating resource ID 1)
+   http://localhost:8080/list?user=user1 (For listing resource IDs for user1)
+   http://localhost:8080/listAll (For listing resource IDs for all the users)
+
 ## Unit Tests
 
 Unit tests can be compiled using BUILD_UNIT_TESTS=ON cmake argument: cmake -DBUILD_UNIT_TESTS=ON ..

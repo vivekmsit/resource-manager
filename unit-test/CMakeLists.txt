@@ -11,6 +11,7 @@ target_link_libraries(
         GTest::Main
         ${GMock_LIBRARIES}
         inventory
+        resource_manager
 )
 
 install(TARGETS ${TARGET_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
